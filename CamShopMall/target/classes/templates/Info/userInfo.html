@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+  <head>
+    <title>userInfo.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>  
+  </head>
+  <body>
+    <span th:insert="top :: topInfo"></span>
+    
+    <div class="container">
+		<div class="col-sm-12">
+			<div class="row">
+               <div class="col-xs-2">
+			        <ul class="nav nav-pills nav-stacked">
+			        <li class="active"><a href="#">用户中心</a>
+			        </li>
+			        </ul>
+    		   </div>
+   			    <div class="col-sm-10">
+     			  <a th:href="@{/addGoods}"><!-- SpringBoot项目下的templates文件夹就相当于web项目下的WEB-INF,不能通过链接跳转，只能通过控制器跳转 -->
+	                 <span class="glyphicon glyphicon-plus">上传商品</span>
+				  </a>
+				 <table class="table table-bordered">
+					<caption>上传的商品</caption>
+					<thead>
+						<tr>
+						    <th width="5%"><input type="checkbox" id="selectAll" ></th>
+							<th width="20%">商品名称</th>
+							<th width="10%">商品价格</th>
+							<th width="35%">商品商品描述</th>
+							<th width="10%">商品上传时间</th>
+							<th width="10%">编辑商品</th>
+						</tr>
+						
+					</thead>
+					<tbody>
+						<tr th:each="goods : ${page.Content}">
+						    <td><input type="checkbox" class="itemSelect"></td>
+							<td th:text="${goods.goodsName}"></td>
+							<td th:text="${goods.goodsPrice}"></td>
+							<td th:text="${goods.goodsDesc}"></td>
+							<td th:text="${goods.goodsModifiedTime}"></td>
+							<th width="10%">
+							    <a th:href="'/editGoods?id='+${goods.goodsId}">修改</a>|
+							    <a th:href="'/deleteGoods?id='+${goods.goodsId}">删除</a>
+							</th>
+						</tr>
+					</tbody>
+   			   </div>
+    	</div>
+    </div>
+    
+    
+    
+  </body>
+  <script src="/js/jquery.min.js" th:src="@{/webjars/jquery/2.1.1/jquery.js}"></script>
+  <script src="/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+  
+</html>

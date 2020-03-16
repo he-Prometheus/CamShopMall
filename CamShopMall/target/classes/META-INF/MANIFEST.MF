@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: CamShopMall
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Admin
+Implementation-Vendor-Id: com.ithe
+Build-Jdk: 1.8.0_152
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/CamShopMall
+Created-By: Maven Integration for Eclipse
+

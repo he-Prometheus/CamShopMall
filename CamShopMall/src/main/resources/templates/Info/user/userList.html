@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>userList.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+	<script src="/js/jquery.min.js" th:src="@{/webjars/jquery/2.1.1/jquery.js}"></script>
+    <script src="/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+  </head>
+  
+  <body th:fragment="userListInfo">
+    <table class="table table-bordered">
+	<caption>用户列表</caption>
+	<thead>
+	    <tr>
+        </tr>   
+		<tr>
+			<th width="15%">用户名</th>
+			<th width="10%">用户密码</th>
+			<th width="25%">用户邮箱</th>
+			<th width="10%">余额（￥）</th>
+			<th width="15%">用户注册时间</th>
+			<th width="25%">编辑</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="user : ${page.Content}">
+		    <!-- <td width="5%"><input type="checkbox" class="itemSelect"></td> -->
+			<td width="15%" th:text="${user.userName }"></td>
+			<td width="10%" th:text="${user.userPassword}"></td>
+			<td width="25%" th:text="${user.userEmail}"></td>
+			<td width="10%" th:text="${user.userMoney}"></td>
+			<td width="15%" th:text="${user.registerTime}"></td>
+			<th width="25%">
+			    <a th:href="'/addUser?id='+${user.userId}">详情</a>|
+			    <a th:href="'/editUser?id='+${user.userId}">修改</a>|
+			    <a th:href="'/deleteUser?id='+${user.userId}">删除</a>
+			</th>
+		</tr>
+	</tbody>
+	</table>
+  </body>
+</html>

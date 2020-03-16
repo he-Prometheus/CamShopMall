@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+  <head>
+    <title>admin.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+	<script src="/js/jquery.min.js" th:src="@{/webjars/jquery/2.1.1/jquery.js}"></script>
+    <script src="/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse" role="navigation">
+	   <div>
+	       <ul class="nav navbar-nav">
+	           <li class="active"><a th:href="@{/index}" >商城首页</a></li>
+	           <li><a th:href="@{/showCategory/1}">书籍文具</a></li>
+	           <li><a th:href="@{/showCategory/2}">鞋服配饰</a></li>
+	           <li><a th:href="@{/showCategory/3}">电器用品</a></li>
+	           <li><a th:href="@{/showCategory/4}">运动音乐</a></li>
+	           <li><a th:href="@{/showCategory/5}">其他</a></li>
+	       </ul>
+	       <ul class="nav navbar-nav navbar-right">
+	           <li id="before1" th:if="${exitUser} != null"><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> 注册</a></li> 
+               <li id="before2" th:if="${exitUser} != null"><a th:href="@{/login}" ><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+	           <li><a th:href="@{/admInfo}"><span class="glyphicon glyphicon-asterisk" ></span></a></li>
+	        </ul> 
+	    </div>
+		</div>
+	</nav>
+
+    <div class="container">
+		<div class="col-sm-12">
+			<div class="row">
+               <div class="col-xs-2">
+			        <ul class="nav nav-pills nav-stacked">
+			        <li class="active"><a href="#">管理员中心</a></li>
+			        <li ><a th:href="@{/adm/goodsList}">商品列表</a></li>
+			        <li><a th:href="@{/adm/userList}">用户列表</a></li>
+			        <!-- <li><a href="@{/adm/payList}">交易记录</a></li> -->
+			        </ul>
+    		   </div>
+    		   
+   			   <div class="col-sm-10">
+   			  
+     			    <span th:insert="Info/goods/goodsList :: goodsListInfo" th:if="${msg} eq 'goods'"></span>
+                    <span th:insert="Info/user/userList :: userListInfo" th:if="${msg} eq 'user'"></span>
+   			   
+   			   </div>
+   			   <div class="modal-footer no-margin-top">
+			    <ul class="pagination pull-right no-margin">
+			        <!-- 首页 -->
+			        <li>
+			            <a th:href="'/list?Info='+${msg}+'&pageNum=0'">首页</a>
+			        </li>
+			        <!-- 上一页 -->
+			        <li th:if="${page.hasPrevious()}">
+			            <a th:href="'/list?Info='+${msg}+'&pageNum=' + ${page.previousPageable().getPageNumber()}" th:text="上一页"></a>
+			        </li>
+			
+			        <!-- 中间页 -->
+			        <li th:each="pageNum:${#numbers.sequence(0, page.getTotalPages() - 1)}">
+			            <a th:href="'/list?Info='+${msg}+'&pageNum=' + ${pageNum}" th:text="${pageNum + 1}" th:if="${pageNum ne page.pageable.getPageNumber()}"></a>
+			            <a th:href="'/list?Info='+${msg}+'&pageNum=' + ${pageNum}" th:text="${pageNum + 1}" th:if="${pageNum eq page.pageable.getPageNumber()}" th:style="'font-weight:bold;background: #6faed9;'"></a>
+			        </li>
+			
+			        <!-- 下一页 -->
+			        <li th:if="${page.hasNext()}">
+			            <a th:href="'/list?Info='+${msg}+'&pageNum=' + ${page.nextPageable().getPageNumber()}" th:text="下一页"></a>
+			        </li>
+			
+			        <!-- 尾页 -->
+			        <li>
+			            <a th:href="'/list?Info='+${msg}+'&pageNum=' + ${page.getTotalPages() - 1}">尾页</a>
+			        </li>
+			    </ul>
+			</div>
+   			</div>  
+    	</div>
+    </div>
+    
+  </body>
+</html>
